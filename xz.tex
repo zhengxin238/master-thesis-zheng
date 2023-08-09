@@ -1,0 +1,400 @@
+\documentclass[
+   a4paper,                      % use regular A4 sized paper.
+   tucfont,                      % use the Stone fonts
+%   german,                       % use german Logo and section names
+   english,                      % use english logo instead
+   tuctitle,                     % use the TUC title style
+   % preprint,                     % use preprinted titlepage paper
+   % 11pt,                         % main font size
+   intoc,                        % for the nomenclature package
+   twoside,                      % use both sides of the paper
+   captions=tableheading,        % Captions on top of a table
+   openright,                    % open new chapters on a right side
+   % draft,                        % draft version, opposite of final
+   final,                        % final and last version
+   ]{tuc-thesis}                 % our own (meta) class
+
+
+%%% -------------------------------------------------------- &Packages ---
+\usepackage[main=ngerman,english]{babel} % new german orthography
+\usepackage[utf8]{inputenc}      % Text is inserted in UTF-8
+% \usepackage[T1]{fontenc}         % use modern Font encoding
+\usepackage[hang,raggedright]{subfigure} % put more than one figure in a % figre
+                                 % environment 
+\usepackage{graphicx}            % insert graphics files and such
+\usepackage{booktabs}            % for better lines in tables
+\usepackage{array}               % for better tables
+\usepackage{longtable}           % for tables, that span across
+                                 % multiple pages
+\usepackage{mflogo}              % for the metafont logo
+% \usepackage[newfloat=true]{minted} % for better listings?
+% \usepackage{weiterbildung}       % used for printing usage of LaTeX
+                                 % commands and such 
+\usepackage{nicefrac}            % for nicer frations like 1/2
+\usepackage{units}               % for nice printing of units like N
+\usepackage{amssymb}
+\usepackage{amsmath}                   % or km/h
+\usepackage{textcomp}            % for \textdegree to obtain °
+\usepackage{nomencl}             % explain Fremdwort
+\usepackage[style=numeric]{biblatex} % newer and more versatile
+                                 % bibliography tool
+
+
+
+
+%%% ------------------------------------------------------- &Variablen ---
+
+\newcommand{\theauthor}{Xin Zheng}
+\newcommand{\thetitle}{Altruistic committee election rules}
+
+%%% Some useful variables . . .
+
+\TUCauthor{Xin}
+\TUCtitle{Altruistic committee election rules} 
+% if you have a subtitle...
+% \TUCsubtitle{Subtitel der Abschlussarbeit} % 
+                                 % similar to \subtitle (defined by
+                                 % KOMA-Script classes
+\TUCdate{Tag Monat Jahr} {09072023}    % similar to \date
+\TUCthesistype{Master-Thesis}    % usually Bachelorarbeit or
+                                 % Master-Thesis
+\TUCinstitute{Dezernat 4}
+\Firstcensor{Prof. Dr. Robert Bredereck}
+\Secondcensor{Titel Vorname Nachname}
+% \Thirdcensor{Präsident Prof.\ Dr.\ Joachim Schachtner}
+\Supervisor{Vorname Nachname}
+
+
+\hypersetup{%
+  unicode=false,%
+  pdftoolbar=true,%
+  pdfmenubar=true,%
+  pdffitwindow=false,%
+  pdfstartview={FitV},%
+  pdfpagelayout={TwoColumnLeft},%
+  colorlinks=true,%
+  linkcolor=TUCgreen,%
+  citecolor=TUCred,%
+  filecolor=TUCred,%
+  urlcolor=TUCgreen,%
+  pdfauthor={\theauthor},
+  pdftitle={\thetitle},
+  pdfsubject={Eine kurze Beschreibung},
+  % pdfcreator={\LaTeX\ with package \flqq{}hyperref\frqq},
+  % pdfproducer={pdfTeX \the\pdftexversion.\pdftexrevision},
+  pdfkeywords={Keyword 1, Keyword 2, Keyword 3},
+  pdfnewwindow=true}
+%% 
+%% Some important settings for the presentation of listings
+% \setminted[latex]{frame=lines,linenos=true,fontsize=\small}
+
+
+%% 
+%% Correction to prevent printing the logo so close to the edge, that
+%% the printer is not able to print it correctly.
+% \setlength{\logovcorr}{15mm}
+% \setlength{\logohcorr}{15mm}
+
+
+
+%% Which bibliography database to use?
+% \bibliography{tuc-thesis}
+
+
+
+%%%..................................................... &Nomenclature ...
+%% 
+%% use nomencl package to explain unknown wordings.
+%% first: use the package.
+\makenomenclature
+%% To create this index, first run latex, than run
+%% makeindex tuc-thesis.nlo -s nomencl.ist -o tuc-thesis.nls
+%% before running latex again.
+%% 
+%% Use a more convienent section name
+\renewcommand{\nomname}{Fremdwortverzeichnis}
+%% Redefine the way, the entry is formatted.
+\renewcommand{\nomlabel}[1]{\textsf{#1}\hfil}
+\setlength{\nomlabelwidth}{2cm}
+%% define a command, to insert with least efford, the word and its
+%% description in one pass.  This command takes 2 (up to 3) arguments:
+%%  1) the unknown word itself, which is to be put literally into the
+%%     list of nomenclatures
+%%  2) the explaination, which will be only visible in the list of
+%%     nomenclatures
+%%  3) Eventually the unknown word in a different type, to be output
+%%     in the text instead of #1
+\makeatletter
+\newcommand{\fremdwort}[3][\@empty]{%
+  \nomenclature{#2}{#3}%
+  % If #1 is not set, we don't need it.
+  \ifx\@empty#1\emph{#2}\else\emph{#1}\fi}%
+\makeatother
+
+
+
+%%% -------------------------------------------------------- &Includes ---
+\includeonly{%
+%   zusammenfassung,
+%   tuc-cd,
+%   typographie,
+%   einleitung,
+%   latex-klassen,
+%   zusammenfassung,
+}
+
+
+
+%%% ======================================================== &Document ===
+\begin{document}
+
+
+
+%%% ---------------------------------------------------- &Front-Matter ---
+%% Start with  different page numbers
+\frontmatter
+
+%% First of all, beginn with a title page
+\makeTUCtitle                   % similar to \title.
+
+\section{Introduction}
+
+
+\section{Definitions}
+Assume we have n voters and m candidates for a committee election case with the committee size of g . Let V = \{ $V_1$, $V_2$, \dots , $V_n$ \} be a set of all voters. Let C = \{ $C_1$, $C_2$, \dots , $C_m$ \} be a set of all candidates. This way we can describe a committee election case as $E(C,V,g)$ where (m = $\mid C \mid$, n= $\mid V \mid$ ).
+
+We define $F_{V_i}  \subseteq V$ (i = 1, 2,  \dots , n) as a subset of V contains all the friends of $V_i$. We say W is a friend of $V_i$ if $W \subseteq F_{V_i}$
+\newline
+Besides, we define $\succeq$ = ( $\succeq_{V_1}$, $\succeq_{V_2}$, \dots , $\succeq_{V_n}$) as the set of preferences that each voter has over all the candidates in C. 
+
+We use S to denote the score a candidate receives. We assume $S_{V_i}(C_j)$ is the borda score that candidate $C_j$ receives from voter $V_i$. Under the circumstance that we have m candidates all together, the borda score can be calculated as follows: if voter $V_i$ ranks candidate $C_j$ at the position k in $\succeq_{V_j}$, then:
+\begin{equation}
+S_{V_i}(C_j) =  m - k + 1 \label{con:bordascore}
+\end{equation}
+
+\subsection{score based rules}
+\subsubsection{score based selfish rule}
+We propose a score based selfish rule where the committee election is only dependent on each voter's personal opinion. For a committee election case  $E(C,V,g)$ where (m = $\mid C \mid$, n= $\mid V \mid$ ).
+
+In this setting, each voter will first decide his preference $\succeq_{V_i} (i = 1, 2, \dots , n)$ and this is reflected by the borda score (\ref{con:bordascore}). Without considering the opinion of friends, we calculate the final score of a candidate as the sum of the score it received from all voters:
+\begin{equation}
+S^{SF}(C_j) = \sum_{i=1}^{n} S_{V_i}(C_j)= S_{V_1}(C_j) + S_{V_2}(C_j) + \dots + S_{V_n}(C_j)\label{SB:SF_aggr_voter_Score}
+\end{equation}
+
+The top g candidates with the highest scores will be elected into the final committee.
+
+\subsubsection{score based altruistic rule}
+We propose a score based altruistic rule where the committee election is only dependent on each voter's friends' opinion and ignore the voter's personal opinion. For a committee election case  $E(C,V,g)$ where (m = $\mid C \mid$, n= $\mid V \mid$ ). We define $F_{V_i}  \subseteq V$ (i = 1, 2,  \dots , n) as a subset of V contains all the friends of $V_i$. We say W is a friend of $V_i$ if $W \subseteq F_{V_i}$.
+
+Similarly, each voter will first decide his preference $\succeq_{V_i} (i = 1, 2, \dots , n)$ and this is reflected by the borda score (\ref{con:bordascore}).
+
+Then we will consider the opinion of friends and calculate the altruistic score based on the original scoring of each voter. For this, we need to first introduce a relation variant $f_{v_i}^{rel}(v_j)$, which indicates the relationship between two voters $V_i\subseteq V$ and $V_j\subseteq V$. 
+ \begin{equation}
+ f_{v_i}^{rel}(v_j) =\begin{cases}
+        1, &V_j \subseteq F_{V_i} \\
+        0, &otherwise
+        \end{cases}\label{re:RL}
+\end{equation}
+The altruistic score is the average of the score a candidate $C_k$ receives from the voter $V_i$'s friends $F_{V_i}$:
+\begin{equation}
+\begin{split}
+S_{V_i}^{AL}(C_k) &= \frac{1}{\mid F_{V_i}\mid}\sum_{j=1}^{n} f_{v_i}^{rel}(v_j)S_{V_j}(C_k) \\
+            &= \frac{1}{\mid F_{V_i}\mid}[f_{v_i}^{rel}(v_1)S_{V_1}(C_k) + \dots + f_{v_i}^{rel}(v_n)S_{V_n}(C_k)]\label{SB:AL_singlevoter_Score}
+\end{split}
+\end{equation}
+The final score of a candidate $C_k$ is calculated as the sum of the score it received from all voters
+\begin{equation}
+S^{AL}(C_k) = \sum_{i=1}^{n} S_{V_i}^{AL}(C_k)= S_{V_1}^{AL}(C_k) + S_{V_2}^{AL}(C_k) + \dots + S_{V_n}^{AL}(C_k)\label{SB:AL_aggr_voter_Score}
+\end{equation}
+
+The top g candidates with the highest scores will be elected into the final committee.
+
+\subsubsection{score based equal treatment rule}
+In the equal treatment rule, we combine the selfish rule and the altruistic rules and calculate the score of each candidate aggregating half of the altruistic score and half of the selfish score:
+\begin{equation}
+S_{V_i}^{EQ}(C_k) = \frac{1}{2}S_{V_i}^{AL}(C_k) + \frac{1}{2}S_{V_i}(C_k)\label{SB:EQ_singlevoter_Score}
+\end{equation}
+
+We can reformulate the Equation (\ref{SB:EQ_singlevoter_Score}) using Equation (\ref{con:bordascore}) and Equation (\ref{SB:AL_singlevoter_Score}): 
+\begin{equation}
+\begin{split}
+S_{V_i}^{EQ}(C_k) &= \frac{1}{2\mid F_{V_i}\mid}\sum_{j=1}^{n} f_{v_i}^{rel}(v_j)S_{V_j}(C_k)+  \frac{1}{2}S_{V_i}(C_k) \\
+            &= \frac{1}{2}(\frac{1}{\mid F_{V_i}\mid}(f_{v_i}^{rel}(v_1)S_{V_1}(C_k) + \dots + f_{v_i}^{rel}(v_n)S_{V_n}(C_k)) + S_{V_i}(C_k))\label{SB:EQ_singlevoter_Score_reform}\end{split}
+\end{equation}
+
+Similarly, the final score of a candidate $C_k$ is calculated as the sum of the score it received from all voters:
+\begin{equation}
+S^{EQ}(C_k) = \sum_{i=1}^{n} S_{V_i}^{EQ}(C_k)= S_{V_1}^{EQ}(C_k) + S_{V_2}^{EQ}(C_k) + \dots + S_{V_n}^{EQ}(C_k)\label{SB:EQ_aggr_voter_Score}
+\end{equation}
+
+We elect, same as all cases above, the top g candidates with the highest scores into the final committee.
+
+\subsubsection{score based most popular first rule}
+In practise, there are often opinion leaders(this is a cited concept) who can influence the majority of the friends circle. We introduce therefore the following rule that consider only the opinion of the most popular friend within each friends circle.
+For this, we need a specific relation variant $f_{v_i}^{mst}(v_j)$, which indicates the relationship between two voters $V_i\subseteq V$ and $V_j\subseteq V$. 
+ \begin{equation}
+ f_{v_i}^{mst}(v_j) =\begin{cases}
+        1, &\forall  V_p \subseteq F_{V_i},   \mid F_{V_j} \mid \geqslant 
+        \mid F_{V_p} \mid  \\
+        0, &otherwise
+        \end{cases}\label{re:MST}
+\end{equation}
+
+The most popular score $S_{V_i}^{MST}(C_k)$ is the score of the most popular voter in $V_i$'s friends $F_{V_i}$:
+\begin{equation}
+\begin{split}
+S_{V_i}^{MST}(C_k) &= \frac{1}{\sum_{j=1}^{n} f_{v_i}^{mst}(v_j)}\sum_{j=1}^{n} f_{v_i}^{mst}(v_j)S_{V_j}(C_k) \\
+            &= \frac{1}{\sum_{j=1}^{n} f_{v_i}^{mst}(v_j)}(f_{v_i}^{mst}(v_1)S_{V_1}(C_k) + \dots + f_{v_i}^{mst}(v_n)S_{V_n}(C_k))\label{SB:MST_singlevoter_Score}
+\end{split}
+\end{equation}
+The final score of a candidate $C_k$ is calculated as the sum of the score it received from all voters. The top g candidates with the highest scores will be elected into the final committee.
+
+\subsubsection{score based more popular first rule}
+For this, we need a specific relation variant $f_{v_i}^{mst}(v_j)$, which indicates the relationship between two voters $V_i\subseteq V$ and $V_j\subseteq V$. 
+ \begin{equation}
+ f_{v_i}^{mre}(v_j) =\begin{cases}
+        1, & \mid F_{V_i}\mid\leqslant  \mid F_{V_j} \mid \\
+        0, &otherwise
+        \end{cases}\label{re:MRE}
+\end{equation}
+
+The more popular score $S_{V_i}^{MRE}(C_k)$ is the average score of all more popular voters in $V_i$'s friends $F_{V_i}$:
+\begin{equation}
+\begin{split}
+S_{V_i}^{MRE}(C_k) &= \frac{1}{\sum_{j=1}^{n} f_{v_i}^{mre}(v_j)}\sum_{j=1}^{n} f_{v_i}^{mst}(v_j)S_{V_j}(C_k) \\
+            &= \frac{1}{\sum_{j=1}^{n} f_{v_i}^{mre}(v_j)}(f_{v_i}^{mst}(v_1)S_{V_1}(C_k) + \dots + f_{v_i}^{mre}(v_n)S_{V_n}(C_k))\label{SB:MRE_singlevoter_Score}
+\end{split}
+\end{equation}
+
+The final score of a candidate $C_k$ is calculated as the sum of the score it received from all voters. The top g candidates with the highest scores will be elected into the final committee.
+\subsection{approval based rules}
+\subsubsection{approval based selfish rule}
+Correspondent to the score based selfish rule we propose a approval based selfish rule where the committee election is only dependent on each voter's personal opinion. For a committee election case  $E(C,V,g)$ where (m = $\mid C \mid$, n= $\mid V \mid$ ). We define $A_{V_i}  \subseteq C$ (i = 1, 2,  \dots , n) as a subset of C contains all the approved candidates by $V_i$. We say Y is a approved candidate by $V_i$ if $Y \subseteq A_{V_i}$.
+
+We use T to denote the times that a candidate is approved by a voter. We assume $T_{V_i}(C_k)$ is the time that candidate $C_k$ is approved by voter $V_i$. As defined earlier, $C_k \subseteq A_{V_i}$ if voter $V_i$ approves $C_k$, then: 
+
+\begin{equation} 
+        T_{v_i}(C_k) =
+        \begin{cases}
+        1, &C_k \subseteq A_{V_i} \\
+        0, &otherwise
+        \end{cases}\label{AB:SF_voter_Times}
+\end{equation}
+Without considering the opinion of friends, we calculate the final times of approval a candidate $C_k$ receives as the sum of the approval it received from all voters:
+\begin{equation}
+T^{SF}(C_k) = \sum_{i=1}^{n} T_{V_i}(C_k)= T_{V_1}(C_k) + T_{V_2}(C_k) + \dots + T_{V_n}(C_k)\label{AB:SF_aggr_voter_Score}
+\end{equation}
+The top g candidates with the highest times of approval will be elected into the final committee.
+
+\subsubsection{approval based altruistic rule}
+
+In the altruistic setting, we will first calculate the times of approval for each candidate by each voter as with Equation (\ref{AB:SF_voter_Times}). The friend circle of each voter $V_i$ is $F_{V_i}$, a voter $V_i$ will calculate his altruistic approval times $T^{AL}$ as how many times a candidate $C_k$ is approved by all friends of his $V_j \subseteq F_{V_i}$. For this, we use the relation variant $f_{v_i}^{rel}(v_j)$ as of (\ref{re:RL}) again: \begin{equation}
+   \begin{split}
+T_{V_i}^{AL}(C_k) &= \frac{1}{\mid F_{V_i}\mid}\sum_{j=1}^{n} f_{v_i}^{rel}(v_j)T_{V_j}(C_k) \\
+            &= \frac{1}{\mid F_{V_i}\mid}(f_{v_i}^{rel}(v_1)T_{V_1}(C_k) + \dots + f_{v_i}^{rel}(v_n)T_{V_n}(C_k))\label{AB:AL_singlevoter_Times}
+\end{split} 
+\end{equation}
+For each candidate, the final times of approval $T^{AL}(C_k)$ can be calculated as:
+\begin{equation}
+T^{AL}(C_k) = \sum_{i=1}^{n} T_{V_i}^{AL}(C_k)= T_{V_1}^{AL}(C_k) + T_{V_2}^{AL}(C_k) + \dots + T_{V_n}^{AL}(C_k)\label{AB:AL_aggr_voter_Times}
+\end{equation}
+The top g candidates with the highest times of approval will be elected into the final committee.
+\subsubsection{approval based equal treatment rule}
+In the altruistic setting, we will combine the selfish rule and the altruistic rule and calculate the new times of approval as follows:
+
+\begin{equation}
+   \begin{split}
+T_{V_i}^{EQ}(C_k) &= \frac{1}{2}T_{V_i}^{EQ}(C_k) +\frac{1}{2}T_{V_i}(C_k)\\
+                  &= \frac{1}{2}(\frac{1}{\mid F_{V_i}\mid}\sum_{j=1}^{n} f_{v_i}^{rel}(v_j)T_{V_j}(C_k)
+                  +T_{V_i}(C_k))\\
+                  &= \frac{1}{2}(\frac{1}{\mid F_{V_i}\mid}(f_{v_i}^{rel}(v_1)T_{V_1}(C_k) + \dots + f_{v_i}^{rel}(v_n)T_{V_n}(C_k))+T_{V_i}(C_k))\label{AB:EQ_singlevoter_Times}
+\end{split}
+\end{equation}
+For each candidate, the final times of approval $T^{AL}(C_k)$ can be calculated as:
+\begin{equation}
+T^{EQ}(C_k) = \sum_{i=1}^{n} T_{V_i}^{EQ}(C_k)= T_{V_1}^{EQ}(C_k) + T_{V_2}^{EQ}(C_k) + \dots + T_{V_n}^{EQ}(C_k)\label{AB:EQ_aggr_voter_Times}
+\end{equation}
+The top g candidates with the highest times of approval will be elected into the final committee.
+\subsection{non-weighted approval based rules}
+In this case, the voters will only change his approval for a certain candidate $C_k$, if certain percentage of his friends are holding the opposite opinion towards this candidate, we denote this percentage as $\rho$. We define these friends of $V_i$ as $F^{opp}_{V_i}$: $W \in F^{opp}_{V_i}$ if $W \in F_{V_i}$ and $T_{W}(C_k) \neq T_{V_i}(C_k)$, then we will let $V_i$ adopt the majority opinion of all his friends and therefore:
+
+\begin{equation} 
+        T_{v_i}(C_k) =
+        \begin{cases}
+        T_{v_i}(C_k) \oplus 1, & \frac{\mid F^{opp}_{V_i} \mid}{\mid F_{V_i} \mid}\geqslant \rho \\
+        T_{v_i}(C_k), &otherwise
+        \end{cases}\label{NW:voter_Times}
+\end{equation}
+
+We calculate the final times of approval a candidate $C_k$ receives as the sum of the approval it received from all voters. The top g candidates with the highest times of approval will be elected.
+
+\subsection{more complex rules}
+
+\subsubsection{limit personal dissatisfaction rule}
+sometimes a voter can make to a certain extend compromises for his friends. For this case, we introduce a voting rule with limited personal dissatisfaction. We first describe the degree of personal dissatisfaction with a Personal Dissatisfaction Score (PDS). For approval based setting, the PDS is valued with the number of candidates in the final voting decision, that a voter does not approval originally. For a committee election case  $E(C,V,g)$ where (m = $\mid C \mid$, n= $\mid V \mid$ ), we denote the approval ballot of voter $V_i$ as $B_{V_i}^{org}$ and the final decision approval ballot $B_{V_i}^{fnl}$. Then the PDS score of voter $V_i$ which is denoted as $S_{V_i}^{PDS}$ can be defined as:
+\begin{equation}
+S_{V_i}^{PDS}=  \mid (C \setminus B_{V_i}^{org}) \cap B_{V_i}^{fnl}  \mid
+\label{CP:PDS}
+\end{equation}
+
+On the other hand, we want to measure how happy are the friends of a voter regarding the final voting decision of a voter. We describe the degree of friends' satisfaction with a Friends' Satisfaction Score (FSS). $FSS \subseteq [0,1]$. The FSS score of $V_i$ is dependent to $F_{V_i}$, and how each of the friends is satisfied with the final decision of this voter. We use the relation variant $f_{v_i}^{rel}(v_j)$ to keep the friends and filter the non-friends. The final decision approval ballot of $V_i$ covers certain number of candidates which is in the original approval ballot of voter $V_j$ as: $B_{V_i}^{org}$  is $B_{V_i}^{cov}(V_j)$:
+
+\begin{equation}
+    B_{V_i}^{cov}(V_j) = \mid B_{V_j}^{org} \cap B_{V_i}^{fnl} \mid
+\end{equation}
+
+With this notion, we can then describe how satisfied is a voter $V_j$ with the final decision of voter $V_i$:
+\begin{equation}
+S_{V_i}^{FSS}(V_j)=\frac{B_{V_i}^{cov}(V_j)}{g}
+\end{equation}
+We weight each friend differently according to how "influential" a voter is. Depending on how many friends each voter has, the weight of the voter $V_j$ in the friends circle of $V_i$ is: 
+\begin{equation}
+W_{F_{V_i}}(V_j)=\frac{\mid F_{V_j}\mid }{\sum_{r=1}^{n}f_{v_i}^{rel}(v_r) \mid F_{V_r} \mid }
+\end{equation}
+The final FSS of a voter $V_i$ for his decision $B_{V_i}^{fnl}$ can be calculated as follows:
+\begin{equation}
+S_{V_i}^{FSS}=\sum_{j=1}^{n}f_{v_i}^{rel}(v_j)S_{V_i}^{FSS}(V_j)W_{F_{V_i}}(V_j)
+\end{equation}
+In general, if a voter make some compromises for his friends, this will rise the FSS and also the PDS at the same time. We aim to limit the PDS to a certain value and within this PDS, we try to find the highest FSS possible.
+
+
+
+
+
+
+%% Now have the table of contents, list of figures, list of tables, etc.
+% \tableofcontents{}
+% \listoffigures{}
+% \listoftables{}
+% % \lstlistoflistings{}
+% 
+% 
+% 
+% %%% ----------------------------------------------------- &Main-Matter ---
+% \mainmatter
+% \include{einleitung}
+% \include{preliminiaries}
+% \include{hauptteil}
+% \include{fazit}
+
+
+%%% ----------------------------------------------------- &Back-Matter ---
+\backmatter
+
+%% Normally, this is the appendix
+\printbibliography
+
+
+
+
+\end{document}
+%%% ============================================================= &EOF ===
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-engine: luatex
+%%% TeX-PDF-mode: t
+%%% TeX-master: t
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

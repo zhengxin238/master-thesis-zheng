@@ -1,0 +1,152 @@
+%%%
+%%% @(#) tuc-fonts.sty -- load and use the ITC Stone fonts for Clausthal University of Technology
+%%%
+%%% Time-stamp:  <2017-02-06 11:21:16 tmjb>
+%%%
+%%%
+%%% @(#) $Id: tuc-fonts.sty,v 1.1 2016/07/05 14:27:10 tmjb Exp tmjb $
+%%% @(#) $Keywords: TU Clausthal, TUC, Corporate Design, CD, Stone Fonts, ITC$
+%%%
+%%%
+%%%          File: /home/tmjb/lib/temf/tex/latex/tuc-fonts/tuc-fonts.sty
+%%%       Project: TUC-FONTS
+%%%       Version: $Revision: 1.1 $
+%%%   Description: Styledatei zur Nutzung der ITC Stone Serif bzw. ITC
+%%%                Stone Sans Serif als Corporate Design Schrift der
+%%%                TU Clausthal
+%%%        Author: tmjb -- Jan Braun <Jan.Braun@tu-clausthal.de>
+%%%    Maintainer: tmjb -- Jan Braun <Jan.Braun@tu-clausthal.de>
+%%% Creation-Date: 2016-03-18 -- Jan Braun <Jan.Braun@tu-clausthal.de>
+%%%     Copyright: (c) 2016 Jan Braun
+%%%
+
+%%% ------------------------------------------------------ &Change Log ---
+%%%
+%%% $Log: tuc-fonts.sty,v $
+%%% Revision 1.1  2016/07/05 14:27:10  tmjb
+%%% Initial revision
+%%%
+
+
+%%% ============================================================ &Code ===
+
+%%% ---------------------------------------------------- &Package Name ---
+% \NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{tuc-fonts}[2016/6/24 0.1.1  TU Clausthal Coporate Design fonts (JB)]
+
+
+%%% ------------------------------------------------------- &Variables ---
+%% We need some variables, to store and indicate which options (see
+%% later) are choosen ...
+
+
+%%% --------------------------------------------------------- &Options ---
+%% Options are definid by the main package or for this special style
+%% file.  Just add them in square brackets like this:
+%% \usepackage[final,foo,bar]{tuc-fonts}
+%% I advise, to avoid using final and draft in package related
+%% options, as the are normally handed over from the main class
+%% package options.
+%%
+
+%% ............................................................ &Final ...
+%% Option final is set, when you intend to print the final copy of
+%% your work.
+
+%% ....................................................... &Undeclared ...
+%% This one is for any option, which was not declared before.
+\DeclareOption*{\OptionNotUsed}
+%% Set the options.
+\ProcessOptions\relax
+
+
+
+%%% -------------------------------------------------------- &Messages ---
+%% Print out some warning messages, while compiling the text.
+
+
+
+%%% -------------------------------------------------------- &Packages ---
+%%
+%% To get all definitions of this style to work, we need some more
+%% packages.  They are automatically loaded here.
+%%
+%% First of all, we have to decide, if we are runnung latex, pdflatex
+%% or lualatex.
+\RequirePackage{ifpdf,ifxetex,ifluatex} 
+\ifpdf
+    \typeout{^^J *** PDF mode *** } 
+\else
+    \typeout{^^J *** DVI mode ***} 
+\fi 
+\ifluatex
+    \typeout{^^J *** LUA mode ***} 
+  \RequirePackage{fontspec}            % to be used with luatex/luLaTex 
+\else
+  \RequirePackage[utf8]{inputenc}
+  %% Unfortunately, these packages still don't work.  Lets use Latin
+  %% Modern meanwhile
+  % \RequirePackage{stoneserif}
+  % \RequirePackage{stonesans}
+  \RequirePackage{lmodern}
+\fi
+
+
+
+%%% ------------------------------------------------------ &Definitions ---
+
+%% if we do use LuaTeX, just load the Stone fonts directly.  As the
+%% user requested to load this fonts, we trust the user and don't
+%% check for the existence of the fonts itself.
+\ifluatex%
+%  \RequirePackage{luatex}
+%  \RequirePackage{unicode-math}
+  \RequirePackage{fontspec}
+  %% Setup the usage of StoneSerif and StoneSans as default fonts.
+  %%TODO What shall we do with typewriter and math fonts?
+  \setmainfont{StoneSerITCStd-Medium.otf}[%
+         Ligatures      = TeX,%
+         % Numbers        = OldStyle,%
+         Scale          = MatchLowercase,%
+         BoldFont       = StoneSerITCStd-SemiBold.otf,%
+         ItalicFont     = StoneSerITCStd-MediumIta.otf,%
+         BoldItalicFont = StoneSerITCStd-SemiBoldIta.otf%
+         ]%
+  \setsansfont{StoneSansITCStd-Medium.otf}[%
+         Ligatures      = TeX,%
+         % Numbers        = OldStyle,%
+         Scale          = MatchLowercase,%
+         BoldFont       = StoneSansITCStd-SemiBold.otf,%
+         ItalicFont     = StoneSansITCStd-MediumIta.otf,%
+         BoldItalicFont = StoneSansITCStd-SemiBoldIta.otf%
+         ]%
+  %% Provide the correct glyphens for quotes.
+  \ProvideTextCommand{\glqq}{EU2}{%
+    \textormath{\quotedblbase}{\mbox{\quotedblbase}}}%
+  \ProvideTextCommand{\grqq}{EU2}{%
+    \textormath{\textquotedblleft}{\mbox{\textquotedblleft}}}%
+  \ProvideTextCommand{\glq}{EU2}{%
+    \textormath{\quotesinglbase}{\mbox{\quotesinglbase}}}%
+  \ProvideTextCommand{\grq}{EU2}{%
+    \textormath{\textquoteleft}{\mbox{\textquoteleft}}}%
+  \ProvideTextCommand{\flqq}{EU2}{%
+    \textormath{\guillemotleft}{\mbox{\guillemotleft}}}%
+  \ProvideTextCommand{\frqq}{EU2}{%
+    \textormath{\guillemotright}{\mbox{\guillemotright}}}%
+  \ProvideTextCommand{\flq}{EU2}{%
+    \textormath{\guilsinglleft}{\mbox{\guilsinglleft}}}%
+  \ProvideTextCommand{\frq}{EU2}{%
+    \textormath{\guilsinglright}{\mbox{\guilsinglright}}}%
+\fi%
+
+
+
+
+%%% ============================================================= &EOF ===
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: nil
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:

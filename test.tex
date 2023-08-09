@@ -1,0 +1,203 @@
+\documentclass[
+   a4paper,                      % use regular A4 sized paper.
+   tucfont,                      % use the Stone fonts
+   german,                       % use german Logo and section names
+%    english,                      % use english logo instead
+   tuctitle,                     % use the TUC title style
+   % preprint,                     % use preprinted titlepage paper
+   % 11pt,                         % main font size
+   intoc,                        % for the nomenclature package
+   twoside,                      % use both sides of the paper
+   captions=tableheading,        % Captions on top of a table
+   openright,                    % open new chapters on a right side
+   % draft,                        % draft version, opposite of final
+   final,                        % final and last version
+   ]{tuc-thesis}                 % our own (meta) class
+
+
+%%% -------------------------------------------------------- &Packages ---
+\usepackage[main=ngerman,english]{babel} % new german orthography
+\usepackage[utf8]{inputenc}      % Text is inserted in UTF-8
+% \usepackage[T1]{fontenc}         % use modern Font encoding
+\usepackage[hang,raggedright]{subfigure} % put more than one figure in a % figre
+                                 % environment 
+\usepackage{graphicx}            % insert graphics files and such
+\usepackage{booktabs}            % for better lines in tables
+\usepackage{array}               % for better tables
+\usepackage{longtable}           % for tables, that span across
+                                 % multiple pages
+\usepackage{mflogo}              % for the metafont logo
+% \usepackage[newfloat=true]{minted} % for better listings?
+% \usepackage{weiterbildung}       % used for printing usage of LaTeX
+                                 % commands and such 
+\usepackage{nicefrac}            % for nicer frations like 1/2
+\usepackage{units}               % for nice printing of units like N
+                                 % or km/h
+\usepackage{textcomp}            % for \textdegree to obtain °
+\usepackage{nomencl}             % explain Fremdwort
+\usepackage[style=numeric]{biblatex} % newer and more versatile
+                                 % bibliography tool
+
+
+
+
+%%% ------------------------------------------------------- &Variablen ---
+
+\newcommand{\theauthor}{Vorname Nachname}
+\newcommand{\thetitle}{Titel der Abschlussarbeit}
+
+%%% Some useful variables . . .
+
+\TUCauthor{\theauthor} % similar to \author
+\TUCtitle{\thetitle} % similar to \title
+% if you have a subtitle...
+% \TUCsubtitle{Subtitel der Abschlussarbeit} % 
+                                 % similar to \subtitle (defined by
+                                 % KOMA-Script classes
+\TUCdate{Tag Monat Jahr}      % similar to \date
+\TUCthesistype{Bachelorarbeit}    % usually Bachelorarbeit or
+                                 % Master-Thesis
+\TUCinstitute{Dezernat 4}
+\Firstcensor{Titel Vorname Nachname}
+\Secondcensor{Titel Vorname Nachname}
+% \Thirdcensor{Präsident Prof.\ Dr.\ Joachim Schachtner}
+\Supervisor{Vorname Nachname}
+
+
+\hypersetup{%
+  unicode=false,%
+  pdftoolbar=true,%
+  pdfmenubar=true,%
+  pdffitwindow=false,%
+  pdfstartview={FitV},%
+  pdfpagelayout={TwoColumnLeft},%
+  colorlinks=true,%
+  linkcolor=TUCgreen,%
+  citecolor=TUCred,%
+  filecolor=TUCred,%
+  urlcolor=TUCgreen,%
+  pdfauthor={\theauthor},
+  pdftitle={\thetitle},
+  pdfsubject={Eine kurze Beschreibung},
+  % pdfcreator={\LaTeX\ with package \flqq{}hyperref\frqq},
+  % pdfproducer={pdfTeX \the\pdftexversion.\pdftexrevision},
+  pdfkeywords={Keyword 1, Keyword 2, Keyword 3},
+  pdfnewwindow=true}
+%% 
+%% Some important settings for the presentation of listings
+% \setminted[latex]{frame=lines,linenos=true,fontsize=\small}
+
+
+%% 
+%% Correction to prevent printing the logo so close to the edge, that
+%% the printer is not able to print it correctly.
+% \setlength{\logovcorr}{15mm}
+% \setlength{\logohcorr}{15mm}
+
+
+
+%% Which bibliography database to use?
+% \bibliography{tuc-thesis}
+
+
+
+%%%..................................................... &Nomenclature ...
+%% 
+%% use nomencl package to explain unknown wordings.
+%% first: use the package.
+\makenomenclature
+%% To create this index, first run latex, than run
+%% makeindex tuc-thesis.nlo -s nomencl.ist -o tuc-thesis.nls
+%% before running latex again.
+%% 
+%% Use a more convienent section name
+\renewcommand{\nomname}{Fremdwortverzeichnis}
+%% Redefine the way, the entry is formatted.
+\renewcommand{\nomlabel}[1]{\textsf{#1}\hfil}
+\setlength{\nomlabelwidth}{2cm}
+%% define a command, to insert with least efford, the word and its
+%% description in one pass.  This command takes 2 (up to 3) arguments:
+%%  1) the unknown word itself, which is to be put literally into the
+%%     list of nomenclatures
+%%  2) the explaination, which will be only visible in the list of
+%%     nomenclatures
+%%  3) Eventually the unknown word in a different type, to be output
+%%     in the text instead of #1
+\makeatletter
+\newcommand{\fremdwort}[3][\@empty]{%
+  \nomenclature{#2}{#3}%
+  % If #1 is not set, we don't need it.
+  \ifx\@empty#1\emph{#2}\else\emph{#1}\fi}%
+\makeatother
+
+
+
+%%% -------------------------------------------------------- &Includes ---
+\includeonly{%
+%   zusammenfassung,
+%   tuc-cd,
+%   typographie,
+%   einleitung,
+%   latex-klassen,
+%   zusammenfassung,
+}
+
+
+
+%%% ======================================================== &Document ===
+\begin{document}
+
+%%% ---------------------------------------------------- &Front-Matter ---
+%% Start with different page numbers
+\frontmatter
+
+%% First of all, beginn with a title page
+\makeTUCtitle                   % similar to \title.
+
+%% Give the assertion, that this file was created by me.
+\TUCassertion
+
+%% Lets have a short summary first.
+% \include{zusammenfassung}
+
+%% Declare all kind of unknown words.
+\printnomenclature{}
+
+
+
+%% Now have the table of contents, list of figures, list of tables, etc.
+% \tableofcontents{}
+% \listoffigures{}
+% \listoftables{}
+% % \lstlistoflistings{}
+% 
+% 
+% 
+% %%% ----------------------------------------------------- &Main-Matter ---
+% \mainmatter
+% \include{einleitung}
+% \include{preliminiaries}
+% \include{hauptteil}
+% \include{fazit}
+
+
+%%% ----------------------------------------------------- &Back-Matter ---
+\backmatter
+
+%% Normally, this is the appendix
+\printbibliography
+
+
+
+
+\end{document}
+%%% ============================================================= &EOF ===
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-engine: luatex
+%%% TeX-PDF-mode: t
+%%% TeX-master: t
+%%% TeX-parse-self: t
+%%% TeX-auto-save: t
+%%% End:
