@@ -1,8 +1,8 @@
-PWD d:/TU Clausthal/Masterarbeit/thesis-template
+PWD d:/TU Clausthal/Masterarbeit/ma
 INPUT c:/texlive/2023/texmf.cnf
 INPUT c:/texlive/2023/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT d:/TU Clausthal/Masterarbeit/thesis-template/xz.tex
+INPUT d:/TU Clausthal/Masterarbeit/ma/xz.tex
 OUTPUT xz.log
 INPUT ./tuc-thesis.cls
 INPUT ./tuc-thesis.cls

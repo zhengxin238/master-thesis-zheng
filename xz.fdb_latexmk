@@ -1,11 +1,11 @@
 # Fdb version 4
 ["biber xz"] 0 "xz.bcf" "xz.bbl" "xz" 0 -1
-  "xz.bcf" 1690609959 107606 78dc1ed1a2fd48d144b9f0c9daee4520 "pdflatex"
+  "xz.bcf" 1691600756 107606 78dc1ed1a2fd48d144b9f0c9daee4520 "pdflatex"
   (generated)
   "xz.bbl"
   "xz.blg"
   (rewritten before read)
-["pdflatex"] 1690609955 "d:/TU Clausthal/Masterarbeit/thesis-template/xz.tex" "xz.pdf" "xz" 1690609959 2
+["pdflatex"] 1691600754 "d:/TU Clausthal/Masterarbeit/ma/xz.tex" "xz.pdf" "xz" 1691600757 2
   "Logo/Logo-TUC-EN-CMYK.pdf" 1688917046 12244 b591510bdfd98f0ac75e73343b5bd2b6 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1688915080 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1688915080 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -172,17 +172,17 @@
   "c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1688916415 4662804 27f73c2f767ae4579fe38abe9088e726 ""
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1688916514 7883409 fbba168a3d5033e263eeea515e1622ac ""
   "c:/texlive/2023/texmf.cnf" 1688916385 713 e69b156964470283e0530f5060668171 ""
-  "d:/TU Clausthal/Masterarbeit/thesis-template/xz.tex" 1690609953 21386 addab36ae59986a30911e851418f98d2 ""
+  "d:/TU Clausthal/Masterarbeit/ma/xz.tex" 1691592809 21387 ce96f0ecabe9ad1d57f4b3ecc31dd94f ""
   "tuc-cd.sty" 1688917046 19264 fc58b3d10d7b4798399547bc5e6fd112 ""
   "tuc-colors.sty" 1688917046 5062 b0bb6af40b28ba8938209f364c9e0f89 ""
   "tuc-fonts.sty" 1688917046 5471 0425f7af51de9bd2595dde860b8d9c48 ""
   "tuc-thesis.cls" 1688917046 14528 ce17632e91aa3cbd2e5518067faac8ed ""
   "tuc-thesis.sty" 1688917046 10703 ea78cb9dfbe478d43da0fb114d287960 ""
-  "xz.aux" 1690609959 5311 0c16ad6eedc618036c4379c1df14f6cd "pdflatex"
+  "xz.aux" 1691600756 5311 0c16ad6eedc618036c4379c1df14f6cd "pdflatex"
   "xz.bbl" 1688920858 0 d41d8cd98f00b204e9800998ecf8427e "biber xz"
-  "xz.out" 1690609958 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "xz.run.xml" 1690609959 2271 6aa68ca7bde3ce91865307187742dfb5 "pdflatex"
-  "xz.tex" 1690609953 21386 addab36ae59986a30911e851418f98d2 ""
+  "xz.out" 1691600756 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "xz.run.xml" 1691600756 2271 6aa68ca7bde3ce91865307187742dfb5 "pdflatex"
+  "xz.tex" 1691592809 21387 ce96f0ecabe9ad1d57f4b3ecc31dd94f ""
   (generated)
   "xz.aux"
   "xz.bcf"
